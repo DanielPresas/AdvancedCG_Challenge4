@@ -1,0 +1,158 @@
+{
+  "folders": [
+    {
+      "path": "..",
+      "name": "Root",
+    }
+  ],
+  "launch": {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version"       : "0.2.0",
+    "configurations": [
+      {
+        "name"         : "(Windows) Launch",
+        "type"         : "cppvsdbg",
+        "request"      : "launch",
+        "program"      : "${workspaceFolder}\\build\\computer_vision.exe",
+        "args"         : [],
+        "stopAtEntry"  : false,
+        "cwd"          : "${workspaceFolder}\\build",
+        "environment"  : [],
+        "console"      : "integratedTerminal",
+        // "preLaunchTask": "Copy DLLs",
+      },
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks"  : [
+      {
+        "type"   : "cppbuild",
+        "label"  : "Build debug",
+        "detail" : "compiler: cl.exe",
+        "command": "\"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvarsall.bat\" x64 && cl.exe",
+        "args"   : [
+          "/Zi",
+          "/EHsc",
+          "/nologo",
+
+          // "/showIncludes",
+          "/I${workspaceFolder}\\opencv\\install\\opencv\\include",
+
+          "/Fe:",
+          "${workspaceFolder}\\build\\computer_vision.exe",
+          "${file}",
+
+          "/link",
+          "/libpath:${workspaceFolder}\\opencv\\install\\opencv\\x64\\vc16\\staticlib",
+
+          "kernel32.lib",
+          "user32.lib",
+          "gdi32.lib",
+          "winspool.lib",
+          "comdlg32.lib",
+          "advapi32.lib",
+          "shell32.lib",
+          "ole32.lib",
+          "oleaut32.lib",
+          "uuid.lib",
+          "odbc32.lib",
+          "odbccp32.lib",
+
+          "ade.lib",
+          "IlmImf.lib",
+          "ippicvmt.lib",
+          "ippiw.lib",
+          "ittnotify.lib",
+          "libjpeg-turbo.lib",
+          "libopenjp2.lib",
+          "libpng.lib",
+          "libprotobuf.lib",
+          "libtiff.lib",
+          "libwebp.lib",
+          "quirc.lib",
+          "zlib.lib",
+
+          "opencv_aruco455.lib",
+          "opencv_barcode455.lib",
+          "opencv_bgsegm455.lib",
+          "opencv_bioinspired455.lib",
+          "opencv_calib3d455.lib",
+          "opencv_core455.lib",
+          "opencv_datasets455.lib",
+          "opencv_dnn_objdetect455.lib",
+          "opencv_dnn_superres455.lib",
+          "opencv_dnn455.lib",
+          "opencv_dpm455.lib",
+          "opencv_face455.lib",
+          "opencv_features2d455.lib",
+          "opencv_flann455.lib",
+          "opencv_fuzzy455.lib",
+          "opencv_gapi455.lib",
+          "opencv_hfs455.lib",
+          "opencv_highgui455.lib",
+          "opencv_img_hash455.lib",
+          "opencv_imgcodecs455.lib",
+          "opencv_imgproc455.lib",
+          "opencv_intensity_transform455.lib",
+          "opencv_line_descriptor455.lib",
+          "opencv_mcc455.lib",
+          "opencv_ml455.lib",
+          "opencv_objdetect455.lib",
+          "opencv_optflow455.lib",
+          "opencv_phase_unwrapping455.lib",
+          "opencv_photo455.lib",
+          "opencv_plot455.lib",
+          "opencv_quality455.lib",
+          "opencv_rapid455.lib",
+          "opencv_shape455.lib",
+          "opencv_stitching455.lib",
+          "opencv_superres455.lib",
+          "opencv_video455.lib",
+          "opencv_videoio455.lib",
+          "opencv_videostab455.lib",
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}\\build"
+        },
+        "problemMatcher": [
+          "$msCompile"
+        ],
+        "group": {
+          "kind"     : "build",
+          "isDefault": true,
+        },
+        "presentation": {
+          "echo"            : true,
+          "reveal"          : "always",
+          "focus"           : false,
+          "panel"           : "dedicated",
+          "showReuseMessage": false,
+          "clear"           : true
+        },
+      },
+      {
+        "label"  : "Copy DLLs",
+        "type"   : "shell",
+        "command": "cmd.exe",
+        "args"   : [
+          "/c",
+          "(robocopy /xo /xx /ns /np /ndl /njh /njs \"${workspaceFolder}\\opencv\\build\\x64\\vc15\\bin\" \"${workspaceFolder}\\build\" opencv_world455.dll opencv_world455.pdb)",
+          "^&",
+          "if", "%errorlevel%", "leq", "1", "echo", "Copy", "successful.", "&&", "exit", "0"
+        ],
+        "problemMatcher": [],
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": false,
+          "clear": true
+        }
+      }
+    ]
+  }
+}
