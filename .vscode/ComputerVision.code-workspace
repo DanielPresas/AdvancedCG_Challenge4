@@ -21,7 +21,7 @@
         "cwd"          : "${workspaceFolder}\\build",
         "environment"  : [],
         "console"      : "integratedTerminal",
-        // "preLaunchTask": "Copy DLLs",
+        "preLaunchTask": "Build debug",
       },
     ]
   },
@@ -34,16 +34,26 @@
         "detail" : "compiler: cl.exe",
         "command": "\"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvarsall.bat\" x64 && cl.exe",
         "args"   : [
-          "/Zi",
-          "/EHsc",
           "/nologo",
+          "/permissive-",
+
+          "/EHsc",
+          "/fp:fast",
+          "/Gy",
+          "/GL",
+          "/MT",
+          "/O2",
+          "/Oi",
+          "/W4",
+          "/Zi",
+          "/Zc:inline",
 
           // "/showIncludes",
           "/I${workspaceFolder}\\opencv\\install\\opencv\\include",
 
           "/Fe:",
           "${workspaceFolder}\\build\\computer_vision.exe",
-          "${file}",
+          "${workspaceFolder}\\src\\main.cpp",
 
           "/link",
           "/libpath:${workspaceFolder}\\opencv\\install\\opencv\\x64\\vc16\\staticlib",
@@ -133,26 +143,23 @@
           "clear"           : true
         },
       },
-      {
-        "label"  : "Copy DLLs",
-        "type"   : "shell",
-        "command": "cmd.exe",
-        "args"   : [
-          "/c",
-          "(robocopy /xo /xx /ns /np /ndl /njh /njs \"${workspaceFolder}\\opencv\\build\\x64\\vc15\\bin\" \"${workspaceFolder}\\build\" opencv_world455.dll opencv_world455.pdb)",
-          "^&",
-          "if", "%errorlevel%", "leq", "1", "echo", "Copy", "successful.", "&&", "exit", "0"
-        ],
-        "problemMatcher": [],
-        "presentation": {
-          "echo": true,
-          "reveal": "always",
-          "focus": false,
-          "panel": "shared",
-          "showReuseMessage": false,
-          "clear": true
-        }
-      }
     ]
+  },
+  "settings": {
+    "files.associations": {
+      "*.asset": "yaml",
+      "*.json": "jsonc",
+      "*.meta": "yaml",
+      "*.nupkgproj": "xml",
+      "*.prefab": "yaml",
+      "*.uss": "css",
+      "*.unity": "yaml",
+      "*.uxml": "xml",
+      "vector": "cpp",
+      "fstream": "cpp",
+      "sstream": "cpp",
+      "xlocbuf": "cpp",
+      "xloctime": "cpp"
+    }
   }
 }
