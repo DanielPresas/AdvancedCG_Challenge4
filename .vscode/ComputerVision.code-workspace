@@ -21,7 +21,19 @@
         "cwd"          : "${workspaceFolder}\\build",
         "environment"  : [],
         "console"      : "integratedTerminal",
-        "preLaunchTask": "Build debug",
+        "preLaunchTask": "Build debug (MSVC)",
+      },
+      {
+        "name"           : "(Linux) Launch",
+        "type"           : "cppdbg",
+        "request"        : "launch",
+        "program"        : "${workspaceFolder}\\build\\computer_vision",
+        "args"           : [],
+        "stopAtEntry"    : false,
+        "cwd"            : "${workspaceFolder}\\build",
+        "environment"    : [],
+        "externalConsole": false,
+        "preLaunchTask"  : "Build debug",
       },
     ]
   },
@@ -30,7 +42,7 @@
     "tasks"  : [
       {
         "type"   : "cppbuild",
-        "label"  : "Build debug",
+        "label"  : "Build debug (MSVC)",
         "detail" : "compiler: cl.exe",
         "command": "\"C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Auxiliary/Build/vcvarsall.bat\" x64 && cl.exe",
         "args"   : [
